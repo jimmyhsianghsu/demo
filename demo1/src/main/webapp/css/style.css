@@ -1,0 +1,200 @@
+/*
+ * CSS Document 
+ * ============================================================================
+ * 版權所有  2012 鉅潞科技網頁設計公司，並保留所有權利。
+ * 網站地址: http://www.grnet.com.tw
+ * ============================================================================
+ * $Author: 淑真 $
+ * $Date: 2012-10-25 (星期四) $
+*/
+
+@charset "utf-8";
+
+body { margin: 0; padding: 0; font-family:Tahoma, Calibri, Geneva, sans-serif; font-size:12px; /*background: url(../images/bg_ap.gif);*/ }
+a{ color:#414141; text-decoration:none;}
+a:hover{ color:#666;}
+a.getFlash, span.setFlash { background: url(../images/get_flash_player.gif) center no-repeat; display: block; width: 100%;}
+img { border: 0px; text-decoration: none;}
+.resizeNone{ resize:none;}
+.displayNone{ display:none;}
+.clear{ clear:both;}
+
+
+/* ----- 共同架構 -------------------------------------------------------------------------------------------------------------------------- */
+#bgWrapper{ background:url(../images/wrapper_ap.gif) repeat-y center top; width:100%}
+#commWrapper{ width:1000px; margin:0 auto; position: relative;}
+#header, #footer, #mainCont, #iMainCont{ width:1000px; overflow:hidden;}
+#mainCont{ padding:0 20px 0 15px; width: 965px;}
+#mainCont .pLeft{ width:170px; overflow:hidden; float:left}
+#mainCont .pRight{ width: 765px; overflow:hidden; float:right; padding-top:5px}
+
+
+/* ----- 首內頁共用 -------------------------------------------------------------------------------------------------------------------------- */
+.iHeaderBg{background:url(../images/header_bg.gif) no-repeat;height:161px }
+.pHeaderBg{background:url(../images/pheader_bg.gif) no-repeat; height:207px }
+.pBanner{ clear:both; width:1000px; padding-top:16px}
+.piOSmap { width: 100%; background:url(../images/pbanner.jpg) no-repeat; height: 83px; overflow: hidden; display: block;}
+.piOSmap span { height:83px; }
+#header{ padding: 0; width:1000px; }
+#header .logo{ width: 204px; overflow:hidden;height:105px; float:left; padding-left:28px}
+#header .rightBox{ width:750px; overflow: hidden; float:left; padding-left:18px}
+#header .rightBox .icon{ float:right; width:121px; padding:10px 20px 0 0 ; overflow:hidden}
+#header .rightBox .newsletterBox { width:320px; overflow:hidden; float:right; color:#666; padding:22px 22px 12px 0; *padding:15px 22px 0px 0}
+#header .rightBox .newsletterBox img{ vertical-align:middle}
+#footer{ clear:both; /*background:url(../images/footer_bg.gif) no-repeat bottom;*/ padding:0 25px 3px 160px; width:815px; height:60px; margin:25px 0 0}
+#footer .txt1, #footer .txt1 a{ color:#32302a; line-height:41px}
+#footer .txt2 { color:#818181}
+#footer .txt2 a{ color:#818181; text-decoration:underline }
+#footer .txt2 .design a{font-size:11px;-webkit-text-size-adjust: none; text-decoration:none}
+
+/* ----- 右側浮動 -----*/
+#popOrder { position: absolute; z-index: 20; top: 210px; right: -50px; width: 44px; overflow: hidden;}
+/* ----- 主選單 -----*/
+.mainNav{ width:750px; height:48px; overflow:hidden;  clear: both }
+.mainNav ul#nav { width: 750px; margin: 0; padding:0; text-align: center; overflow: hidden; }
+.mainNav ul#nav li { float:left;list-style: none;padding: 0 2px 0 0; width: 148px; height: 48px; }
+.mainNav ul#nav li a {  display: block; width: 148px; height: 48px;  margin: 0; background: url(../images/label.png) 0 -48px no-repeat;}
+.mainNav ul#nav li a:hover, .mainNav ul#nav li a.current { background: url(../images/label.png) 0 0 no-repeat;}
+.mainNav ul#nav li a.js:hover { background: url(../images/label.png) 0 -48px no-repeat;}
+/* ----- 內頁次選單 -----*/
+#mainCont .pLeft h1.title{ margin:0 0 15px; padding:0 0 0 5px; font-size:21px; color:#076d2c; font-family:'微軟正黑體'; width:165px}
+#mainCont .pLeft h1.title span.en{ font-size:13px; color:#a3a5a6; display:block; font-family:Arial, Helvetica, sans-serif; padding:5px 0;}
+#mainCont .pLeft h1.title span.green{ color:#a3c504;}
+#pSubTree{ padding:0 1px; width:168px; overflow:hidden; background:url(../images/pSubTree_bg.gif) no-repeat; min-height:288px; height:auto; border-top:1px solid #fc7100;}
+#pSubTree p{ padding:10px 10px 0; margin:0; width:148px; display:block; line-height:21px; color:#666}
+#pSubTree div.Tree-1 { width: 168px; overflow: hidden; padding:0; margin:0 auto 0; }
+#pSubTree div.Tree-1 a { width: 145px;  padding: 6px 0 5px 23px; display: block; background: url(../images/tree_bg.png) 5px 7px no-repeat ; text-decoration:none;color:#666; }
+#pSubTree div.Tree-1 a:hover, #pSubTree div.Tree-1 span a { background: url(../images/tree_bg_hover.png) 5px 7px no-repeat ; color:#fff ; background-color:#fc7100; font-weight:bold;}
+#pSubTree .linksBox{ width:148px ; margin:30px auto 0}
+#pSubTree .linksBox div{ width:148px; overflow:hidden; height:55px; padding-top:3px}
+/* ----- 目前位置 麵包屑 -----*/
+#mainCont .pRight .url{ width:747px; overflow:hidden; background:url(../images/aw03.gif) no-repeat; color:#777; padding:0 0 0 18px;}
+#mainCont .pRight .url a{ color:#777}
+#mainCont .pRight .url a:hover{ color:#999}
+#mainCont .pRight .url span{ text-decoration:underline}
+/* ----- 目前位置 麵包屑 -----*/
+#mainCont .pRight .commCont .pageNum{ width:765px; overflow:hidden; margin:25px 0;background:url(../images/icon_page.gif) no-repeat;} 
+#mainCont .pRight .commCont .pageNum .num { padding-left:55px;letter-spacing:0.5em}
+#mainCont .pRight .commCont .pageNum .num a{ color:#303030;}
+#mainCont .pRight .commCont .pageNum .num a:hover, #mainCont .pRight .commCont .pageNum .num span a{ color:#f88207;}
+#mainCont .pRight .commCont .pageNum .num span a{ font-weight:bold;}
+#mainCont .pRight .commCont{ width: 765px; overflow:hidden; }
+#mainCont .pRight .commCont .btnBack{ width:765px; overflow:hidden; text-align:center}
+#mainCont .pRight h2.title{ font-size:16px; margin:15px 0; padding:0; color:#;font-family:'微軟正黑體';}
+#mainCont .pRight .commCont h3.message{ font-size:13px; color:#777; font-weight:normal;}
+#mainCont .pRight .commCont .messageBox{ height:480px; }
+
+
+/* ----- 首頁 -------------------------------------------------------------------------------------------------------------------------- */
+#iMainCont{ width:940px; overflow:hidden; padding:0 25px 0 32px; background:url(../images/icont_bg.gif) no-repeat;}
+#iMainCont .topCont{ width:941px; overflow:hidden; padding-bottom:23px}
+#iMainCont .banner{ width: 485px; overflow:hidden; float: left; height: 345px; padding:1px}
+#iMainCont .iOSmap { width: 100%; background:url(../images/banner.jpg) no-repeat; height: 345px; overflow: hidden; display: block;}
+#iMainCont .iOSmap span { height: 345px; }
+#iMainCont .iNewsBox{ width: 370px; overflow:hidden; float:left; margin-left:57px;}
+#iMainCont .iNewsBox .title{ width:370px; overflow:hidden; position:relative; height:15px}
+#iMainCont .iNewsBox .title span.btn{ position:absolute; z-index:1; right:0;width:42px; height:15px}
+#iMainCont .iNewsBox .first{ width:370px; overflow:hidden; padding:15px 0}
+#iMainCont .iNewsBox .first .pic{ width:90px; height:85px; padding:12px 5px 13px; overflow: hidden; float:left; background: url(../images/inews_pic.gif) no-repeat;}
+#iMainCont .iNewsBox .first .txt{ width: 260px; overflow:hidden; float:right; line-height:18px; color:#666; padding-top:10px}
+#iMainCont .iNewsBox .date{ color:#333;}
+#iMainCont .iNewsBox .obj a{ color:#076d2c; font-size:13px; font-weight:bold; line-height:28px}
+#iMainCont .iNewsBox .obj a:hover{ position:relative; top:1px ; left:1px}
+#iMainCont .iNewsBox .list{ line-height:18px; color:#666;}
+#iMainCont .iNewsBox .list td{ padding:3px 0; border-bottom:1px dotted #9b9a9a;}
+#iMainCont .iNewsBox .list .aw{ padding:15px 5px 0}
+#iMainCont .iNewsBox .list div{ padding-bottom:5px}
+#iMainCont .linksBox{ width: 180px; overflow:hidden; float:left}
+#iMainCont .linksBox div{ width:180px; overflow:hidden; height:55px; padding-top:3px}
+#iMainCont .tvcBox{ width: 255px; overflow:hidden; float:left; margin:0 0 0 60px; height:185px; background:url(../images/tvc_bg.gif) no-repeat}
+#iMainCont .tvcBox .tvc{ width:255px; position:relative;height:185px;   }
+#iMainCont .tvcBox .tvc .deco{ width:80px; overflow:hidden; position:absolute; z-index:2; right:0; bottom:0}
+#iMainCont .tvcBox .video{ width:210px; padding:11px 10px; overflow:hidden; height:135px;background:url(../images/load.gif) no-repeat center center;}
+#iMainCont .advBox{ width: 400px; overflow:hidden; float:right; height:180px; background:url(../images/adv_bg.gif) no-repeat; padding: 13px 5px 13px 4px;}
+#iMainCont .advBox #box{position:relative;	width: 400px;}
+#iMainCont .advBox #slides{position:absolute;left:0px; top:3px; z-index:100}
+#iMainCont .advBox #slides .slides_container {	width:400px;	height:145px;	overflow:hidden;}
+#iMainCont .advBox #slides .pagination {  position: absolute; z-index: 99; left:36%; top:145px;*top:155px;}
+#iMainCont .advBox #slides .pagination li {list-style:none;	float:left;	margin:0 2px; padding:0}
+#iMainCont .advBox #slides .pagination li a {	display:block;	width:7px;	height:0;	padding-top:7px; background:url(../images/ipagination.png) no-repeat 0 0;float:left;	overflow:hidden;}
+#iMainCont .advBox #slides .pagination li.current a {	background-position:0 -7px;}
+
+
+/* ----- 公司簡介 -------------------------------------------------------------------------------------------------------------------------- */
+.aboutBox{ width:765px; overflow:hidden; padding-top:45px; line-height:24px}
+.aboutBox p{ margin:0 0 40px; padding:0; color:#666; display:block;}
+.aboutBox p.partOne{ background:url(../images/about_pic01.jpg) no-repeat; padding:35px 330px 70px 20px; width:415px; color:#3b3a3a; margin:0 0 10px }
+.aboutBox p.partOne span.title, .aboutBox span.title{ display:block; padding:0 0 15px;}
+.aboutBox p span.otherTitle, .aboutBox span.otherTitle{ background:url(../images/aw05.gif) no-repeat 0 5px; color:#076d2c; font-size:15px; font-weight:bold; padding:0 0 5px 15px; display:block}
+.aboutBox .partTwo{ background:url(../images/about_pic02.jpg) no-repeat 0 0px ; width:765px; margin:0; padding-top:30px; }
+.aboutBox .partTwo p.twoTxt{ padding:0px 260px 0 0; display:block; width:505px}
+.aboutBox .partTwo p.twoTxt2{ padding:40px 0 0 250px; width:515px; margin:0}
+.aboutBox p.partTwo2{margin:0 0 40px;}
+.aboutBox div.partThree{background:url(../images/about_pic03.jpg) no-repeat 450px 0px; margin:0 0 40px; color:#3b3a3a}
+.aboutBox div.partThree ul{ width: 450px; overflow:hidden;background:url(../images/abour_date.gif) no-repeat 20px 5px ; padding:0; margin:0; list-style:none}
+.aboutBox ul li{ padding:0 0 6px 110px;}
+.aboutBox div.partFour{background:url(../images/about_pic05.jpg) no-repeat 450px 40px; margin:0 0 40px; color:#3b3a3a}
+.aboutBox div.partFour ul{ width: 450px; overflow:hidden;background:url(../images/abour_date02.gif) no-repeat 20px 5px ; padding:0; margin:0; list-style:none}
+.aboutBox ul li{ padding:0 0 6px 110px;}
+.aboutBox .partFive{background:url(../images/about_pic06.jpg) no-repeat 350px 200px }
+.aboutBox .partFive ul.item{ padding:0; margin:0;color:#666}
+.aboutBox .partFive ul.item li{ padding:0 0 0 15px; margin:0}
+
+
+/* ----- 最新消息 -------------------------------------------------------------------------------------------------------------------------- */
+.newsBox{ width:765px; overflow:hidden; padding-top:45px; color:#666; line-height:18px; font-size:13px} 
+.newsBox .list caption{ width:765px; overflow: hidden; background:url(images/list_th.gif) no-repeat; padding:5px 0 15px; font-weight:bold; color:#404040}
+.newsBox .list caption span{ float:left; display:block;width:15%;}
+.newsBox .list caption span.w85{ width:85%;}
+.newsBox .list td{ padding:9px 0 15px; border-bottom:1px dotted #e5e5e5}
+.newsBox .list td strong.obj, .newsBox .viewTitle strong.obj{ font-size:15px; display:block; padding:0 0 2px; color:#076d2c; line-height:24px;}
+.newsBox .list td strong.obj a{display:block ;color:#076d2c}
+.newsBox .list tr:hover { background-color: #eff4e0; color:#333}
+.newsBox .viewTitle{ background:url(../images/view_th.gif) no-repeat bottom; width: 715px; overflow:hidden; padding:0 25px}
+.newsBox .viewTitle .date{ color:#777; padding:0 0 5px}
+.newsBox .viewTitle .date img{ vertical-align:middle}
+.newsBox .fontBox{ background:url(../images/view_bg.gif) no-repeat top; width: 715px; padding:30px 25px}
+
+
+/* ----- 產品櫥窗 -------------------------------------------------------------------------------------------------------------------------- */
+.goodsViewTop, .goodsDetail, .goodsDetail .title{ width:765px; overflow:hidden;}
+.goodsViewTop{ margin:45px 0 50px}
+.goodsViewTop .pic{ width: 295px; height:240px; overflow:hidden; float:left;}
+.goodsViewTop .txt{ width: 440px; overflow:hidden; float:left; margin-left:10px}
+.goodsViewTop .nameBox{ width:440px; overflow:hidden;}
+.goodsViewTop .nameBox strong.name{ font-size:21px; color:#333; font-family:'微軟正黑體'; padding:0 5px; width:213px; overflow:hidden; display:block }
+.goodsViewTop .nameBox .fontDeepRed{ padding-top:5px}
+.goodsViewTop .fontBox{ width:431px; padding:15px 0 15px 9px; line-height:24px; font-size:13px; color:#777}
+.goodsDetail .fontBox{ width:735px; padding:0 15px;}
+
+
+/* ----- 聯絡我們 -------------------------------------------------------------------------------------------------------------------------- */
+.contactBox{width:765px; overflow:hidden; padding-top:45px; line-height:21px}
+.contactBox .form{ width:535px; overflow:hidden; float:left; background: url(../images/contact_pic.jpg) no-repeat right; margin:15px 0}
+.contactBox .form td{ padding:5px 5px}
+.contactBox .info{ width:215px; overflow:hidden; float:right; margin:15px 0 15px 15px; color:#898989; line-height:21px}
+.contactBox .info td{ padding:5px}
+.contactBox .info .add{ line-height:16px}
+.contactBox strong.light, .contactBox .info a{ color:#076d2c}
+.contactBox input{opacity:0.8; -moz-opacity:0.8; -khtml-opacity: 0.8; filter:alpha(opacity=80); color:#000}
+.contactBox input.btn{opacity:1; -moz-opacity:1; -khtml-opacity: 1; filter:alpha(opacity=100);}
+
+
+/* ----- 常見問題 -------------------------------------------------------------------------------------------------------------------------- */
+.faqBox{width:765px; overflow:hidden; padding-top:45px;}
+.faqBox .pQuestion { cursor: pointer; padding:10px 0 10px 50px; width:715px; overflow:hidden; background:url(../images/q_ti.gif) no-repeat bottom; font-family:'微軟正黑體'; font-size:15px; font-weight:bold;}
+.faqBox .pAnswer { display: none; margin: 15px 0 0; padding:0 10px 20px 0; width: 755px; overflow:hidden; background:url(../images/ans_bg.gif) no-repeat right bottom; color:#333; line-height:24px; font-size:13px}
+
+
+
+/* -----其他------ */
+.w80{ width:80px}
+.w140{ width:140px;}
+.w155{ width:155px;}
+.w375{ width:375px;}
+.input{ border:1px solid #ccc;padding:2px 1px; color:#999; font-size:12px; outline:none}
+.fontDeepRed{ color:#bb0000}
+.fontGreen{ color:#439841; font-size:12px}
+.fontBox{ overflow:hidden}
+.fontJustify{text-align: justify; text-justify: inter-ideograph;}
+/* 防木馬

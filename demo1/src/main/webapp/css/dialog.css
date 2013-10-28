@@ -1,0 +1,66 @@
+/* Dialog 樣式 */
+.dialog_title
+{
+    width: 100%;
+    height: 16px;
+    padding: 8px 0px 8px;
+    *padding: 10px 0px 6px;
+    color: #ddd;
+    font-size: 13px;
+    font-family: Times New Roman;
+    background: #000;
+}
+.dialog_title div
+{
+    float: left;
+    margin-left: 8px;
+}
+.dialog_close
+{
+    float: right;
+    margin-right: 6px;
+    cursor: pointer;
+}
+.dialog_txt
+{
+    font-size: 13px;
+    font-family: Times New Roman;
+}
+.dialog_msg
+{
+    list-style: none;
+	line-height: 18px;
+    padding: 2px 0px 1px 17px;
+    *padding: 3px 0px 0px 4px;
+    background: url(../images/dialog/dialog_arrow.gif) no-repeat 5px;
+}
+.dialog_btn
+{
+    list-style: none;
+	margin: 3px 0px;
+	padding: 0px;
+    font-size: 13px;
+    font-family: Times New Roman;
+}
+.dialog_btn li
+{
+    display: inline;
+    margin: 0px 2px;
+}
+.dialog_btn li a
+{
+    padding: 3px 4px 3px 23px;
+    *padding: 4px 4px 2px 20px;
+    color: #666;
+    text-decoration: none;
+    border: 1px solid #bfbfbf;
+}
+.dialog_btn li a:visited.icon_yes, .dialog_btn li a:link.icon_yes {background: #e7edf8 url(../images/dialog/btn_yes.gif) no-repeat 3px;}
+.dialog_btn li a:visited.icon_no, .dialog_btn li a:link.icon_no {background: #e7edf8 url(../images/dialog/btn_no.gif) no-repeat 3px;}
+.dialog_btn li a:visited.icon_close, .dialog_btn li a:link.icon_close {background: #e7edf8 url(../images/dialog/btn_close.gif) no-repeat 3px;}
+.dialog_btn li a:hover.icon_yes, .dialog_btn li a:hover.icon_no, .dialog_btn li a:hover.icon_close
+{
+    color: #333;
+    border: 1px solid #222;
+    background-color: #fff;
+}

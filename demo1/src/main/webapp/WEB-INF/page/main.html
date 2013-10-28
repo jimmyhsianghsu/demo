@@ -1,0 +1,412 @@
+<!-- <!DOCTYPE html> -->
+<html>
+<head>
+    <title>後端管理系統</title>
+	<meta http-equiv='Content-Type' content='text/html; charset=utf-8'>
+    
+    <link rel="stylesheet" type="text/css" href="../easyui/themes/default/easyui.css">
+    <link rel="stylesheet" type="text/css" href="../easyui/themes/icon.css">
+    <link rel="stylesheet" type="text/css" href="../easyui/demo.css">
+    <script type="text/javascript" src="../easyui/jquery.min.js"></script>
+    <script type="text/javascript" src="../easyui/jquery.easyui.min.js"></script>
+    <style>
+    	#infoTab .holder{height:30px}
+    	#infoTab .higher{height:100px}
+    	#infoTab .value{display:none;padding:8px}
+    	#infoTab .field{display:none;height:100%;width:100%}
+    	#infoTab .hide{display:none}
+    </style>
+</head>
+<body>
+	<div class="easyui-layout" data-options="fit:true">
+		<div data-options="region:'north',split:true" style="height:50px"><form action="main" method="post"><input type="text" name="user" readonly/><input type="hidden" name="action" value="logout"/><input type="submit" value="登出"/></form></div>
+		<div data-options="region:'west',split:true" style="width:50px"></div>
+		<div data-options="region:'center'">
+			<div class="easyui-tabs" data-options="border:false,fit:true,onSelect:tabOnSelect">
+				<div title="商品分類">
+					<table id="catTab" class="easyui-datagrid" data-options="
+						url:'main',queryParams:{action:'getCatsJSON'},method:'get',
+						fitColumns:true,singleSelect:true,border:false,
+						toolbar:'#catBar',onSelect:catOnSelect">
+						<thead>
+					        <tr>
+					            <th data-options="field:'key',width:10">序號</th>
+					            <th data-options="field:'name',editor:'text',width:200">分類名稱</th>
+					        </tr>
+					    </thead>
+					</table>
+				</div>
+				<div title="商品管理">
+					<div class="easyui-layout" data-options="fit:true">
+						<div data-options="region:'center'">
+							<table id="prodTab" class="easyui-datagrid" data-options="
+								url:'main',queryParams:{action:'getProdsJSON'},method:'get',
+								fitColumns:true,singleSelect:true,border:false,
+								toolbar:'#prodBar',onSelect:prodOnSelect">
+								<thead>
+							        <tr>
+							            <th data-options="field:'key',width:100,hidden:true">key</th>
+							            <th data-options="field:'no',editor:'text',width:100">型號</th>
+							            <th data-options="field:'name',editor:'text',width:100">商品名稱</th>
+							            <th data-options="field:'cat',formatter:catFormatter,editor:'catEditor',width:100">分類</th>
+							            <th data-options="field:'img',width:100,hidden:true">Img</th>
+							            <th data-options="field:'desc',editor:'text',width:100">商品敘述</th>
+							            <th data-options="field:'price',editor:'text',width:100">價格</th>
+							            <th data-options="field:'onshelf',formatter:shelfFormatter,editor:'shelfEditor',width:100">上下架</th>
+							        </tr>
+							    </thead>
+							</table>
+						</div>
+						<div data-options="region:'east',split:true" style="width:500px">
+							<table id="infoTab" border="1" style="width:100%;border-collapse:collapse">
+								<tr><td colspan="2"><img name="img" width="100%" height="200px"/></td></tr>
+								<tr><td>圖檔</td><td><input name="imgFile" type="file" onchange="imgRead()"/></td></tr>
+								<tr class="hide"><td>key</td><td><div class="holder"><div class="value"></div><input name="key" class="field" type="text"/></div></td></tr>
+								<tr><td>型號 </td><td><div class="holder"><div class="value"></div><input name="no" class="field" type="text"/></div></td></tr>
+								<tr><td>商品名稱</td><td><div class="holder"><div class="value"></div><input name="name" class="field" type="text"/></div></td></tr>
+								<tr><td>分類</td><td><div class="holder"><div class="value"></div><select name="cat" class="field catSel"></select></div></td></tr>
+								<tr class="hide"><td>img</td><td><div class="holder"><div class="value"></div><input name="img" class="field" type="text"/></div></td></tr>
+								<tr><td>商品敘述</td><td><div class="higher"><div class="value"></div><textarea name="desc" class="field"></textarea></div></td></tr>
+								<tr><td>價格</td><td><div class="holder"><div class="value"></div><input name="price" class="field" type="text"/></div></td></tr>
+								<tr><td>上下架</td><td><div class="holder"><div class="value"></div><select name="onshelf" class="field"><option value='1'>on</option><option value='0'>off</option></select></div></td></tr>
+							</table>
+						</div>
+					</div>
+				</div>
+				<div title="商品圖片管理">
+					<table id="imgTab" class="easyui-datagrid" data-options="
+						url:'main',queryParams:{action:'getImgsJSON'},method:'get',
+						fitColumns:false,singleSelect:true,border:false,
+						toolbar:'#imgBar'">
+						<thead>
+					        <tr>
+					            <th data-options="field:'key',width:100">序號</th>
+					            <th data-options="field:'img',width:300">圖片</th>
+					        </tr>
+					    </thead>
+					</table>
+				</div>
+				<div title="最新消息管理">
+					<table id="newsTab" class="easyui-datagrid" data-options="
+						url:'main',queryParams:{action:'getNewsJSON'},method:'get',
+						fitColumns:true,singleSelect:true,border:false,
+						toolbar:'#newsBar',onSelect:newsOnSelect">
+						<thead>
+					        <tr>
+					            <th data-options="field:'key',width:100">序號</th>
+					            <th data-options="field:'date',editor:'dateEditor',width:200">日期</th>
+					            <th data-options="field:'title',editor:'text',width:200">標題</th>
+					            <th data-options="field:'content',editor:'textarea',formatter:textFormatter,width:500">內容</th>
+					        </tr>
+					    </thead>
+					</table>
+				</div>
+				<div title="廣告輪播管理">
+					<table id="slideTab" class="easyui-datagrid" data-options="
+						url:'slide',method:'get',
+						fitColumns:false,singleSelect:true,border:false,
+						toolbar:'#slideBar',onSelect:slideOnSelect">
+						<thead>
+					        <tr>
+					            <th data-options="field:'key',width:100,align:'center'">序號</th>
+					            <th data-options="field:'img',width:300,align:'center'">圖片</th>
+					            <th data-options="field:'onshelf',formatter:shelfFormatter,editor:'shelfEditor',width:100,align:'center'">啟用</th>
+					        </tr>
+					    </thead>
+					</table>
+				</div>
+			</div>
+		</div>
+		<div data-options="region:'south',split:true" style="height:50px">
+			<div id="catBar" style="display:none">
+				<a href="javascript:void(0)" class="easyui-linkbutton" data-options='iconCls:"icon-add"' onclick="catAdd()">新增</a>
+				<a href="javascript:void(0)" class="easyui-linkbutton catEdit" data-options='iconCls:"icon-edit",disabled:true' onclick="catEdit()">修改</a>
+				<a href="javascript:void(0)" class="easyui-linkbutton catSave" data-options='iconCls:"icon-save",disabled:true' onclick="catSave()">儲存</a>
+				<a href="javascript:void(0)" class="easyui-linkbutton catRemove" data-options='iconCls:"icon-cancel",disabled:true' onclick="catRemove()">刪除</a>
+			</div>
+			<div id="prodBar" style="display:none">
+				<a href="javascript:void(0)" class="easyui-linkbutton" plain="true" onclick="">商品分類</a>
+				<select class="catSel" onchange="getProdsByCatJSON()"></select>
+				<a href="javascript:void(0)" class="easyui-linkbutton" data-options='iconCls:"icon-add"' onclick="prodAdd()">新增</a>
+				<a href="javascript:void(0)" class="easyui-linkbutton prodEdit" data-options='iconCls:"icon-edit",disabled:true' onclick="prodEdit()">修改</a>
+				<a href="javascript:void(0)" class="easyui-linkbutton prodSave" data-options='iconCls:"icon-save",disabled:true' onclick="prodSave()">儲存</a>
+				<a href="javascript:void(0)" class="easyui-linkbutton prodRemove" data-options='iconCls:"icon-cancel",disabled:true' onclick="prodRemove()">刪除</a>
+			</div>
+			<div id="imgBar" style="display:none">
+				<a href="javascript:void(0)" class="easyui-linkbutton imgRemove" data-options='iconCls:"icon-cancel",disabled:true' onclick="imgRemove()">刪除</a>
+			</div>
+			<div id="newsBar" style="display:none">
+				<a href="javascript:void(0)" class="easyui-linkbutton" data-options='iconCls:"icon-add"' onclick="newsAdd()">新增</a>
+				<a href="javascript:void(0)" class="easyui-linkbutton newsEdit" data-options='iconCls:"icon-edit",disabled:true' onclick="newsEdit()">修改</a>
+				<a href="javascript:void(0)" class="easyui-linkbutton newsSave" data-options='iconCls:"icon-save",disabled:true' onclick="newsSave()">儲存</a>
+				<a href="javascript:void(0)" class="easyui-linkbutton newsRemove" data-options='iconCls:"icon-cancel",disabled:true' onclick="newsRemove()">刪除</a>
+			</div>
+			<div id="slideBar" style="display:none">
+				<input type="file" name="imgSlide"/>
+				<a href="javascript:void(0)" class="easyui-linkbutton" data-options='iconCls:"icon-add"' onclick="slideAdd()">新增</a>
+				<a href="javascript:void(0)" class="easyui-linkbutton slideEdit" data-options='iconCls:"icon-edit",disabled:true' onclick="slideEdit()">修改</a>
+				<a href="javascript:void(0)" class="easyui-linkbutton slideSave" data-options='iconCls:"icon-save",disabled:true' onclick="slideSave()">儲存</a>
+				<a href="javascript:void(0)" class="easyui-linkbutton slideRemove" data-options='iconCls:"icon-cancel",disabled:true' onclick="slideRemove()">刪除</a>
+			</div>
+			<div>訊息=<span class="info"></span></div>
+		</div>
+	</div>
+</body>
+<script>
+window.onload=function(){getCatsJSON();$.get('main?action=getUser',function(data){$(':input[name$="user"]').val(data)});}
+$.extend($.fn.datagrid.defaults.editors, {
+    catEditor: {
+        init: function(container, options){return $('<select></select>').append($('.catSel').first().find('option').clone().filter(function(){return $(this).val()!='0';})).appendTo(container);},
+        destroy: function(target){$(target).remove();},
+        getValue: function(target){return $(target).val();},
+        setValue: function(target, value){$(target).val(value);},
+        resize: function(target, width){$(target)._outerWidth(width);}
+    },
+	shelfEditor: {
+	    init: function(container, options){return $('select[name$="onshelf"]').first().clone().css({display:''}).appendTo(container);},
+	    destroy: function(target){$(target).remove();},
+	    getValue: function(target){return $(target).val();},
+	    setValue: function(target, value){$(target).val(value);},
+	    resize: function(target, width){$(target)._outerWidth(width);}
+	}
+    ,dateEditor: {
+	    init: function(container, options){return $('<input type="text" class="easyui-datebox" required="required">').appendTo(container);},
+	    destroy: function(target){$(target).remove();},
+	    getValue: function(target){return $(target).datebox('getValue');},
+	    setValue: function(target, value){$(target).val(value);$('.easyui-datebox').datebox();},
+	    resize: function(target, width){$(target)._outerWidth(width);}
+	},
+	textarea: {
+	    init: function(container, options){return $('<textarea rows="10"></textarea>').appendTo(container);},
+	    destroy: function(target){$(target).remove();},
+	    getValue: function(target){return $(target).val();},
+	    setValue: function(target, value){$(target).val(value);},
+	    resize: function(target, width){$(target)._outerWidth(width);}
+	}
+});
+$.fn.datebox.defaults.formatter = function(date){return date.getFullYear()+'-'+(date.getMonth()+1)+'-'+date.getDate();}
+function textFormatter(value,row,index){return '<textarea rows="10" style="width:100%" readonly>'+value+'</textarea>';}
+function catFormatter(value,row,index){$('.catSel').first().children('option').each(function(){if(value==$(this).val())value=$(this).text();});return value;}
+function shelfFormatter(value,row,index){return value=='1'?'on':'off';}
+function prodOnSelect(i,c){
+	$('#infoTab').find('.field').each(function(){
+		var name=$(this).attr('name');
+		var value=c[name];
+		switch(name){
+		case 'cat':value=catFormatter(value);break;
+		case 'onshelf':value=shelfFormatter(value);break;
+		}
+		$(this).css({display:'none'}).parent().children('.value').css({display:'inline-block'}).html(value);
+	});
+	$('#infoTab').find('img[name$="img"]').attr('src','../img.jsp?key='+(c.img?c.img:0));
+	$('.prodEdit,.prodRemove').linkbutton('enable');
+}
+function prodEdit(){
+	$('#infoTab').find('.field').each(function(){
+		var name=$(this).attr('name');
+		var value=$(this).parent().children('.value').html();
+		switch(name){
+		case 'cat':
+		case 'onshelf':$(this).find('option').each(function(){if($(this).text()==value)$(this).attr('selected',true)});break;
+		default:$(this).val(value);
+		}
+		$(this).css({display:'inline'}).parent().children('.value').css({display:'none'});
+	});
+	$('.prodEdit,.prodRemove').linkbutton('disable');
+	$('.prodSave').linkbutton('enable');
+}
+function prodAdd(){
+	$('#prodTab').datagrid('rejectChanges').datagrid('appendRow',{key:null,no:null,name:null,cat:0,img:null,desc:null,price:0,onshelf:0}).datagrid('beginEdit',$('#prodTab').datagrid('getRows').length-1);
+	$('.prodSave').linkbutton('enable');
+}
+function prodSave(){
+	var $tab=$('#prodTab');
+	$.each($tab.datagrid('getRows'),function(i){$tab.datagrid('endEdit',i);});
+	
+	var fd=new FormData();
+	if($tab.datagrid('getChanges').length){
+		fd.append('action','saveProd');
+		$.each($tab.datagrid('getChanges'),function(i,c){$.each(c,function(i1,c1){fd.append(i1,c1);});});
+		$tab.datagrid('acceptChanges');
+	}else{
+		fd.append('action','updateProd');
+		$.each($('#infoTab').find('.field'),function(i,c){fd.append($(c).attr('name'),$(c).val());});		
+	}
+	$('.prodEdit,.prodSave,.prodRemove').linkbutton('disable');
+	ajaxFd(fd);
+}
+function prodRemove(){
+	var c=$('#prodTab').datagrid('getSelected');
+	if(c){
+		var fd=new FormData();
+		fd.append('action','removeProd');
+		fd.append('key',c.key);
+		ajaxFd(fd);
+	}
+	$('.prodEdit,.prodSave,.prodRemove').linkbutton('disable');
+}
+function ajaxFd(fd){
+	var imgFile=$(':input[name="imgFile"]')[0];
+	if(imgFile.files.length)fd.append("imgFile",imgFile.files[0]);
+	imgFile.value='';
+	$.ajax({
+		url:'main',
+		data:fd,
+		type: 'POST',
+		cache: false,
+        dataType:'json',
+		processData: false,
+		contentType: false,
+		success:function(data){$('.info').html('').html(data.count);getCatsJSON();$('#prodTab,#catTab,#newsTab').datagrid('reload');},
+		error: function(xhr){alert('ajaxFd:Ajax request 發生錯誤:[status:'+xhr.status+'][status-text:'+xhr.statusText+']');}
+	});
+}
+function imgRead(){
+	var imgFile=$(':input[name="imgFile"]')[0];
+	var $img=$('#infoTab').find('img[name$="img"]');
+	if(imgFile.files.length){
+		var reader = new FileReader();
+        reader.readAsDataURL(imgFile.files[0]);
+        reader.onload = function(e){$img.attr('src',this.result);}
+	}else $img.attr('src','');
+}
+function catOnSelect(){
+	$('.catEdit,.catRemove').linkbutton('enable');
+}
+function catAdd(){
+	$('#catTab').datagrid('rejectChanges').datagrid('appendRow',{key:null,name:null}).datagrid('beginEdit',$('#catTab').datagrid('getRows').length-1);
+	$('.catSave').linkbutton('enable');
+}
+function catEdit(){
+	$('#catTab').datagrid('beginEdit',$('#catTab').datagrid('getRowIndex',$('#catTab').datagrid('getSelected')));
+	$('.catEdit,.catRemove').linkbutton('disable');
+	$('.catSave').linkbutton('enable');
+}
+function catSave(){
+	var $tab=$('#catTab');
+	$.each($tab.datagrid('getRows'),function(i){$tab.datagrid('endEdit',i);});
+	var fd=new FormData();
+	if($tab.datagrid('getChanges').length){
+		var cat=$tab.datagrid('getChanges')[0];
+		fd.append('action',!cat.key?'saveCat':'updateCat');
+		fd.append('key',cat.key);
+		fd.append('name',cat.name);
+		$tab.datagrid('acceptChanges');
+	}
+	$('.catEdit,.catSave,.catRemove').linkbutton('disable');
+	ajaxFd(fd);
+}
+function catRemove(){
+	var c=$('#catTab').datagrid('getSelected');
+	if(c){
+		var fd=new FormData();
+		fd.append('action','removeCat');
+		fd.append('key',c.key);
+		ajaxFd(fd);
+	}
+	$('.catEdit,.catSave,.catRemove').linkbutton('disable');
+}
+function getCatsJSON(){
+	$.get('main?action=getCatsJSON',function(data){
+		var $sel=$('.catSel');
+		$sel.empty();$('.catSel:not(.field)').append("<option value='0'>ALL</option>");
+		$.each(data.rows,function(i,c){$sel.append($('<option></option>').attr("value",c.key).text(c.name));});
+	},'json');
+}
+function getProdsByCatJSON(){
+	var cat=$('.catSel option:selected').val();
+	$('#prodTab').datagrid({queryParams:cat!='0'?{action:'getProdsByCatJSON',cat:cat}:{action:'getProdsJSON'}});
+}
+function newsOnSelect(){
+	$('.newsEdit,.newsRemove').linkbutton('enable');
+}
+function newsAdd(){
+	$('#newsTab').datagrid('rejectChanges').datagrid('appendRow',{key:null,date:null,titel:null,content:null}).datagrid('beginEdit',$('#newsTab').datagrid('getRows').length-1);
+	$('.newsSave').linkbutton('enable');
+}
+function newsEdit(){
+	$('#newsTab').datagrid('beginEdit',$('#newsTab').datagrid('getRowIndex',$('#newsTab').datagrid('getSelected')));
+	$('.newsEdit,.newsRemove').linkbutton('disable');
+	$('.newsSave').linkbutton('enable');
+}
+function newsSave(){
+	var $tab=$('#newsTab');
+	$.each($tab.datagrid('getRows'),function(i){$tab.datagrid('endEdit',i);});
+	var fd=new FormData();
+	if($tab.datagrid('getChanges').length){
+		var news=$tab.datagrid('getChanges')[0];
+		fd.append('action',!news.key?'saveNews':'updateNews');
+		fd.append('key',news.key);
+		fd.append('date',news.date);
+		fd.append('title',news.title);
+		fd.append('content',news.content);
+		$tab.datagrid('acceptChanges');
+	}
+	$('.newsEdit,.newsSave,.newsRemove').linkbutton('disable');
+	ajaxFd(fd);
+}
+function newsRemove(){
+	var c=$('#newsTab').datagrid('getSelected');
+	if(c){
+		var fd=new FormData();
+		fd.append('action','removeNews');
+		fd.append('key',c.key);
+		ajaxFd(fd);
+	}
+	$('.newsEdit,.newsSave,.newsRemove').linkbutton('disable');
+}
+function slideOnSelect(){
+	$('.slideEdit,.slideRemove').linkbutton('enable');
+}
+function slideAdd(fd){
+	if(!fd)fd=new FormData();
+	var imgSlide=$(':input[name="imgSlide"]')[0];
+	if(imgSlide.files.length)fd.append("imgSlide",imgSlide.files[0]);
+	imgSlide.value='';
+	$.ajax({
+		url:'slide',
+		data:fd,
+		type: 'POST',
+		cache: false,
+        dataType:'json',
+		processData: false,
+		contentType: false,
+		success:function(data){if(data){$('.info').html('').html(data.count);$('#slideTab').datagrid('reload');}},
+		error: function(xhr){alert('ajaxFd:Ajax request 發生錯誤:[status:'+xhr.status+'][status-text:'+xhr.statusText+']');}
+	});
+}
+function slideEdit(){
+	$('#slideTab').datagrid('beginEdit',$('#slideTab').datagrid('getRowIndex',$('#slideTab').datagrid('getSelected')));
+	$('.slideEdit,.slideRemove').linkbutton('disable');
+	$('.slideSave').linkbutton('enable');
+}
+function slideSave(){
+	var $tab=$('#slideTab');
+	$.each($tab.datagrid('getRows'),function(i){$tab.datagrid('endEdit',i);});
+	var fd=new FormData();
+	if($tab.datagrid('getChanges').length){
+		var slide=$tab.datagrid('getChanges')[0];
+		fd.append('action','updateSlide');
+		fd.append('key',slide.key);
+		fd.append('onshelf',slide.onshelf);
+		$tab.datagrid('acceptChanges');
+	}
+	$('.slideEdit,.slideSave,.slideRemove').linkbutton('disable');
+	slideAdd(fd);
+}
+function tabOnSelect(){
+	var $panel=$(this).tabs('getSelected');
+	$panel.find('.easyui-datagrid').datagrid('resize',{height:$panel.css('height').replace('px','')*1});
+}
+function slideRemove(){
+	var c=$('#slideTab').datagrid('getSelected');
+	if(c){
+		var fd=new FormData();
+		fd.append('action','removeSlide');
+		fd.append('key',c.key);
+		slideAdd(fd);
+	}
+	$('.slideEdit,.slideSave,.slideRemove').linkbutton('disable');
+}
+</script>
+</html>
