@@ -48,7 +48,7 @@ D:\M3SDK\Eclipse\m3Workspace\informix\src\main\java\test\RegTest.java
 D:\0.road\2.comp_informix\SqlTest.java
 D:\M3SDK\Eclipse\m3Workspace\informix\src\main\java\test\SqlTest.java
 
-demo.439994
+demo.43999
 D:\0.road\2.comp_demo\back\main.html
 C:\Users\Carbo\git\demo\demo1\src\main\webapp\WEB-INF\page\main.html
 D:\0.road\2.comp_demo\back\login.jsp
@@ -117,14 +117,6 @@ D:\0.road\2.comp_demo\back\head3.jsp
 C:\Users\Carbo\git\demo\demo1\src\main\webapp\head3.jsp
 D:\0.road\2.comp_demo\back\ddsmoothmenu.jsp
 C:\Users\Carbo\git\demo\demo1\src\main\webapp\ddsmoothmenu.jsp
-D:\0.road\2.comp_demo\pom.xml
-C:\Users\Carbo\git\demo\demo1\pom.xml
-D:\0.road\2.comp_demo\web.xml
-C:\Users\Carbo\git\demo\demo1\src\main\webapp\WEB-INF\web.xml
-D:\0.road\2.comp_demo\initDb.txt
-C:\Users\Carbo\git\demo\demo1\src\main\webapp\back\initDb.txt
-D:\0.road\2.comp_demo\mapFile.txt
-C:\Users\Carbo\git\demo\demo1\src\main\webapp\mapFile.txt
 
 domain.2
 D:\0.road\2.comp_emv\domain\EmvViolationOuterObject.java
