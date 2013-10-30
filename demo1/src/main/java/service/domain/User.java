@@ -1,5 +1,6 @@
 package service.domain;
-public class User {
+import java.io.Serializable;
+public class User implements Serializable{
 	private String name;
 	private String pwd;
 	public User(){}

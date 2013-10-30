@@ -52,7 +52,7 @@ if(o1==null)c1=new Integer(0);else c1=Integer.valueOf(o1.toString());
 if(o2==null)c2=new Integer(0);else c2=Integer.valueOf(o2.toString());
 if(o3==null)c3=new Long(java.sql.Date.valueOf(new java.sql.Date(System.currentTimeMillis()).toString()).getTime());else c3=Long.valueOf(o3.toString());
 if(o==null){
-	session.setAttribute("session",new Object());
+	session.setAttribute("session",new service.domain.User());
 	Long c4=java.sql.Date.valueOf(new java.sql.Date(System.currentTimeMillis()).toString()).getTime();
 	if(c4>c3)c1++;
 	c2++;
