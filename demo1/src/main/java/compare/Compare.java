@@ -5,7 +5,7 @@ import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
+import java.io.CharArrayWriter;
 import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -30,6 +30,8 @@ public class Compare extends HttpServlet {
 			res.getWriter().print(treeFile());
 		else if("getMap".equals(action))
 			res.getWriter().print(getMap(getServletContext(),"mapFile.txt"));
+		else if ("getPage".equals(action))
+			res.getWriter().print(getPage("/META-INF/page/compare(10280448).html"));
 	}
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse res)throws ServletException, IOException {
@@ -202,4 +204,20 @@ public class Compare extends HttpServlet {
 			if(bos!=null)try {bos.close();} catch (IOException e) {e.printStackTrace();}
 		}
 	}
+	private String getPage(String path) {
+	BufferedReader br = null;
+	CharArrayWriter caw = new CharArrayWriter();
+	try {
+	    br = new BufferedReader(new InputStreamReader(getClass().getClassLoader().getResourceAsStream(path), "utf8"));
+	    char[] c = new char[1024];
+	    int n = 0;
+	    while ((n = br.read(c)) != -1)
+		caw.write(c, 0, n);
+	} catch (UnsupportedEncodingException e) {
+	    e.printStackTrace();
+	} catch (IOException e) {
+	    e.printStackTrace();
+	}finally{if(br != null)try{br.close();}catch(IOException e){e.printStackTrace();}}
+	return new String(caw.toCharArray());
+    }
 }
