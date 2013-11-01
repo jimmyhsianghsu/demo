@@ -4,28 +4,16 @@ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
 
   <display-name>Archetype Created Web Application</display-name>
-  <servlet>
-		<servlet-name>back</servlet-name>
-		<servlet-class>servlet.Back</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>back</servlet-name>
-		<url-pattern>/back/main</url-pattern>
-	</servlet-mapping>
-	<servlet>
-		<servlet-name>compare</servlet-name>
-		<servlet-class>compare.Compare</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>compare</servlet-name>
-		<url-pattern>/compare</url-pattern>
-	</servlet-mapping>
-	<servlet>
-		<servlet-name>slide</servlet-name>
-		<servlet-class>servlet.SlideServlet</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>slide</servlet-name>
-		<url-pattern>/back/slide</url-pattern>
-	</servlet-mapping>
+	<servlet><servlet-name>back</servlet-name><servlet-class>servlet.Back</servlet-class></servlet>
+	<servlet-mapping><servlet-name>back</servlet-name><url-pattern>/back/main</url-pattern></servlet-mapping>
+	<servlet><servlet-name>slide</servlet-name><servlet-class>servlet.SlideServlet</servlet-class></servlet>
+	<servlet-mapping><servlet-name>slide</servlet-name><url-pattern>/back/slide</url-pattern></servlet-mapping>
+	
+	<servlet><servlet-name>SqlTest</servlet-name><servlet-class>test.SqlTest</servlet-class></servlet>
+	<servlet-mapping><servlet-name>SqlTest</servlet-name><url-pattern>/SqlTest</url-pattern></servlet-mapping>
+	<servlet><servlet-name>compare</servlet-name><servlet-class>compare.Compare</servlet-class></servlet>
+	<servlet-mapping><servlet-name>compare</servlet-name><url-pattern>/compare</url-pattern></servlet-mapping>
+	
+<!-- 	<listener><listener-class>org.springframework.web.context.ContextLoaderListener</listener-class></listener> -->
+<!-- 	<context-param><param-name>contextConfigLocation</param-name><param-value>classpath*:META-INF/spring/*.xml</param-value></context-param> -->
 </web-app>
